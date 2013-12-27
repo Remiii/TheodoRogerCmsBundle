@@ -17,7 +17,9 @@
         <li{% if current_tab == 'content' %} class="current"{% endif %}>
             <a href="{{ url('roger_cms_page_list') }}">{% trans %}Content{% endtrans %}</a>
             <ul class="nav_sub">
-                {{ _self.nav('ROLE_ROGER_READ_CONTENT', url('roger_cms_media_list'), 'Medias', current_nav == 'medias') }}
+                {% if is_granted ( 'ROLE_REMIII_EEDITOR' ) == false %}
+                    {{ _self.nav('ROLE_ROGER_READ_CONTENT', url('roger_cms_media_list'), 'Medias', current_nav == 'medias') }}
+                {% endif %}
                 {{ _self.nav('ROLE_ROGER_READ_CONTENT', url('roger_cms_page_list'), 'Pages', current_nav == 'pages') }}
             </ul>
         </li>

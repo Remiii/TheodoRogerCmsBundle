@@ -29,19 +29,21 @@
             <img src="{{ asset('bundles/theodorogercms/images/admin/spinner.gif') }}" class="ajax-loader hide busy" alt="" />
         </span>
     </td>
-    <td class="status">
-        {{ page.status|trans }}
-    </td>
-    <td class="add_child">
-        <a id="new-{{ page.slug }}-child" href="{{ url('roger_cms_page_new', {'parentId' : page.id}) }}">
-          {% trans %}Add Child{% endtrans %}
-        </a>
-    </td>
-    <td class="remove">
-        <a id="remove-{{ page.slug }}" href="{{ url('roger_cms_page_remove', {'id' : page.id}) }}">
-          {% trans %}Remove{% endtrans %}
-        </a>
-    </td>
+    {% if is_granted ( 'ROLE_REMIII_EEDITOR' ) == false %}
+        <td class="status">
+            {{ page.status|trans }}
+        </td>
+        <td class="add_child">
+            <a id="new-{{ page.slug }}-child" href="{{ url('roger_cms_page_new', {'parentId' : page.id}) }}">
+            {% trans %}Add Child{% endtrans %}
+            </a>
+        </td>
+        <td class="remove">
+            <a id="remove-{{ page.slug }}" href="{{ url('roger_cms_page_remove', {'id' : page.id}) }}">
+            {% trans %}Remove{% endtrans %}
+            </a>
+        </td>
+    {% endif %}
 </tr>
 
 {% if page.children|length > 0 and not page.parent %}

@@ -83,23 +83,28 @@
                     </table>
                 </div>
             </div>
-            <div class="drawer_handle">
-                <a id="link-more-fields" class="toggle more extra-fields-link {% if (hasErrors is not defined) or not hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
-                  {% trans %}More{% endtrans %}
-                </a>
-                <a id="link-less-fields" class="toggle less extra-fields-link {% if (hasErrors is defined) and hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
-                  {% trans %}Less{% endtrans %}
-                </a>
-            </div>
+            {% if is_granted ( 'ROLE_REMIII_EEDITOR' ) == false %}
+                <div class="drawer_handle">
+                    <a id="link-more-fields" class="toggle more extra-fields-link {% if (hasErrors is not defined) or not hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
+                    {% trans %}More{% endtrans %}
+                    </a>
+                    <a id="link-less-fields" class="toggle less extra-fields-link {% if (hasErrors is defined) and hasErrors %}display-ib{% else %}hide{% endif %}" href="#">
+                    {% trans %}Less{% endtrans %}
+                    </a>
+                </div>
+            {% endif %}
         </div>
+
         <div id="tab_control">
             <div class="tabs" id="tabs">
 
-                <div id="tab_toolbar">
-                    <a class="popup" href="#add_part_popup" title="{% trans %}Add Part{% endtrans %}">
-                        <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodorogercms/images/admin/add_tab.png') }}" />
-                    </a>
-                </div>
+                {% if is_granted ( 'ROLE_REMIII_EEDITOR' ) == false %}
+                    <div id="tab_toolbar">
+                        <a class="popup" href="#add_part_popup" title="{% trans %}Add Part{% endtrans %}">
+                            <img alt="{% trans %}Add Part{% endtrans %}" src="{{ asset('bundles/theodorogercms/images/admin/add_tab.png') }}" />
+                        </a>
+                    </div>
+                {% endif %}
                 {% if not tabs %}
                     <a id="tab_body" href="#" class="tab here">
                         <span>{% trans %}Body{% endtrans %}</span>
